@@ -1,0 +1,8 @@
+{
+  "short_name": "react-skeletal-nav",
+  "name": "react-skeletal-nav",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
