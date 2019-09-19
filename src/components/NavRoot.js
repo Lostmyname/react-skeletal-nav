@@ -12,7 +12,7 @@ const NavRoot = ({ navRootId = 'nav-root', children }) => {
         navRootId
       }}
     >
-      {`/${route.join('/')}`}
+      {/* {`/${route.join('/')}`} */}
       <div>{children}</div>
       <div id={navRootId} />
     </RootNavContext.Provider>
