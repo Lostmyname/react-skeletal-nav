@@ -41,17 +41,33 @@ npm install --save react-skeletal-nav
 
 **You need to extend these components for use in your app.** It's easiest to use the HOCs provided, but you can also use render props.
 
+**Nav.js**
+
 ```jsx
 import React from 'react';
-import { withNav, withNavItem } from 'react-skeletal-nav';
+import { withNav } from 'react-skeletal-nav';
 
-export const Nav = withNav(({ children, goBack }) => (
-  <div>
-    <button onClick={goBack}>Back</button>
+export const Nav = withNav(
+  ({ children, goBack, route, isStack, isVisible }) =>
+    // Only render stack nav
+    isStack && (
+      // Hide if not visible, but don't unmount so nested Navs stay mounted
+      <div style={{ display: isVisible ? 'block' : 'none' }}>
+        {/* Never render the back button on the "root" nav */}
+        {route !== 'root' && <button onClick={goBack}>Back</button>}
 
-    {children}
-  </div>
-));
+        {/* Render children, including nested Navs */}
+        {children}
+      </div>
+    )
+);
+```
+
+**NavItem.js**
+
+```jsx
+import React from 'react';
+import { withNavItem } from 'react-skeletal-nav';
 
 export const NavItem = withNavItem(({ children, href, onClick, title }) => (
   <div>
@@ -62,8 +78,14 @@ export const NavItem = withNavItem(({ children, href, onClick, title }) => (
     {children}
   </div>
 ));
+```
 
-// Use your Nav
+**App.js**
+
+```jsx
+import Nav from './Nav';
+import NavItem from './NavItem';
+
 export default () => (
   <Nav>
     <NavItem title="Item 1" href="/" />
@@ -78,14 +100,15 @@ export default () => (
 );
 ```
 
-### From JSON
+### Rendering from JSON
 
 We can also render complex navigation UI from JSON, using the `react-from-json` library. This is particularly useful when working with a headless CMS.
 
 ```jsx
 import React from 'react';
 import ReactFromJSON from 'react-from-json';
-import { Nav, NavItem } from './MyNav';
+import Nav from './Nav';
+import NavItem from './NavItem';
 
 const componentMapping = {
   Nav,
@@ -123,10 +146,12 @@ const data = {
   }
 };
 
-export default () => (
-  <ReactFromJSON mapping={componentMapping} entry={data}></ReactFromJSON>
-);
+export default () => <ReactFromJSON mapping={componentMapping} entry={data} />;
 ```
+
+## API
+
+TBD
 
 ## License
 
