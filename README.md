@@ -23,7 +23,7 @@ const Header = () => (
 );
 ```
 
-It's also possible to [render from JSON](#from-json) by taking advantage from the `react-from-json` library.
+It's also possible to [render from JSON](#rendering-from-json) by taking advantage from the `react-from-json` library.
 
 ## Install
 
