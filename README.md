@@ -153,6 +153,22 @@ export default () => <ReactFromJSON mapping={componentMapping} entry={data} />;
 
 TBD
 
+## Contributing & Releasing
+
+Follow the angular verison of [conventional commits](https://github.com/conventional-changelog-archived-repos/conventional-changelog-angular/blob/master/convention.md) when committing to this repo, as this generates the CHANGELOG.md and ensures we follow semver.
+
+To bump version, generate changelog and prep for release, run:
+
+```sh
+yarn release
+```
+
+then to publish
+
+```sh
+npm publish
+```
+
 ## License
 
 MIT © [chrisvxd](https://github.com/chrisvxd)

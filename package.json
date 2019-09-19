@@ -1,6 +1,6 @@
 {
   "name": "react-skeletal-nav",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Build recursive navigation UIs with React",
   "author": "chrisvxd",
   "license": "MIT",
@@ -19,7 +19,9 @@
     "start": "rollup -c -w",
     "prepare": "yarn run build",
     "predeploy": "cd example && yarn install && yarn run build",
-    "deploy": "gh-pages -d example/build"
+    "deploy": "gh-pages -d example/build",
+    "release": "conventional-recommended-bump -p angular | xargs yarn version --new-version$1",
+    "version": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md"
   },
   "peerDependencies": {
     "prop-types": "^15.5.4",
@@ -34,6 +36,9 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "commitizen": "^2.10.1",
+    "conventional-changelog-cli": "^2.0.5",
+    "conventional-recommended-bump": "^4.0.1",
     "cross-env": "^5.1.4",
     "eslint": "^5.0.1",
     "eslint-config-standard": "^11.0.0",
@@ -57,5 +62,10 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  }
 }
