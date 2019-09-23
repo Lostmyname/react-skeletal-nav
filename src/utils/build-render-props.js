@@ -14,5 +14,6 @@ export default ({ route, setRoute }, { navId, isInline }) => ({
   depth: route.indexOf(navId) + 1,
   isVisible: isInline ? isPast(navId, route) : isVisible(navId, route),
   isInline,
-  isStack: !isInline
+  isStack: !isInline,
+  isPast: isPast(navId, route)
 });
