@@ -3,3 +3,29 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.go-back,
+.nav-item > * {
+  outline: none;
+  border: none;
+  font-size: 16px;
+  padding: 0;
+  cursor: pointer;
+  color: #000;
+}
+
+.go-back {
+  margin-bottom: 10px;
+}
+
+.nav-item > * {
+  text-decoration: none;
+}
+.nav-item.active > * {
+  text-decoration: underline;
+}
+
+.nav-item > *:hover {
+  text-decoration: underline;
+}
+
