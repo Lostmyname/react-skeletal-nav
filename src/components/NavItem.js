@@ -7,7 +7,7 @@ import buildRenderProps from '../utils/build-render-props';
 import withRender from '../utils/with-render';
 
 const NavItem = ({ children, href, render, targetNavId, ...renderProps }) => {
-  const [localTargetNavId] = useState(
+  const [navId] = useState(
     targetNavId || uniqueId(`${kebabCase(renderProps.title || 'nav')}-`)
   );
 
@@ -17,27 +17,30 @@ const NavItem = ({ children, href, render, targetNavId, ...renderProps }) => {
         <NestedNavContext.Consumer>
           {navContext => {
             const { route, setRoute } = rootContext;
-            const { navId } = navContext;
+            const { navId: parentNavId, absoluteRoute: parentAbsoluteRoute } = navContext;
 
-            const routeIndex = route.indexOf(navId);
-            const targetRouteIndex = route.indexOf(localTargetNavId);
+            const routeIndex = route.indexOf(parentNavId);
+            const targetRouteIndex = route.indexOf(navId);
             const isInRoute = targetRouteIndex >= 0;
 
-            const nestedContextValue = {
+            const nextAbsoluteRoute = [...parentAbsoluteRoute, navId];
+
+            const nextNestedContext = {
               title: renderProps.title,
-              navId: localTargetNavId
+              absoluteRoute: nextAbsoluteRoute,
+              navId
             };
 
             return (
               <React.Fragment>
                 <NestedNavContext.Provider
                   value={{
-                    ...nestedContextValue,
+                    ...nextNestedContext,
                     isInline: true
                   }}
                 >
                   {render({
-                    ...buildRenderProps(rootContext, navContext),
+                    ...buildRenderProps(rootContext, { ...navContext, absoluteRoute: nextAbsoluteRoute, itemId: navId }),
                     onClick: () => {
                       if (!href) {
                         if (isInRoute) {
@@ -50,11 +53,11 @@ const NavItem = ({ children, href, render, targetNavId, ...renderProps }) => {
                           // allows us to switch between forks in the route
                           setRoute([
                             ...route.slice(0, routeIndex + 1),
-                            localTargetNavId
+                            navId
                           ]);
                         } else {
                           // Go forward
-                          setRoute([...route, localTargetNavId]);
+                          setRoute([...route, navId]);
                         }
                       }
                     },
@@ -67,7 +70,7 @@ const NavItem = ({ children, href, render, targetNavId, ...renderProps }) => {
 
                 <NestedNavContext.Provider
                   value={{
-                    ...nestedContextValue,
+                    ...nextNestedContext,
                     isInline: false
                   }}
                 >
