@@ -3,12 +3,15 @@ import { RootNavContext } from '../context';
 
 const NavRoot = ({ navRootId = 'nav-root', children }) => {
   const [route, setRoute] = useState(['root']);
+  const [activeRoute, setActiveRoute] = useState([]);
 
   return (
     <RootNavContext.Provider
       value={{
         route,
+        activeRoute,
         setRoute,
+        setActiveRoute,
         navRootId
       }}
     >
