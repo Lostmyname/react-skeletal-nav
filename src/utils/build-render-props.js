@@ -11,6 +11,7 @@ export default ({ route, setRoute, activeRoute, setActiveRoute }, { navId, isInl
     }
   },
   route: navId,
+  absoluteRoute,
   depth: route.indexOf(navId) + 1,
   isVisible: isInline ? isPast(navId, route) : isVisible(navId, route),
   isInline,
