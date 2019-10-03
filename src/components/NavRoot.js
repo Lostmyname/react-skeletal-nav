@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import uniqueId from 'lodash/uniqueId';
 import { RootNavContext } from '../context';
 
-const NavRoot = ({ navRootId = 'nav-root', children }) => {
+const NavRoot = ({ navRootId = uniqueId('nav-root-'), children }) => {
   const [route, setRoute] = useState(['root']);
   const [activeRoute, setActiveRoute] = useState([]);
 
