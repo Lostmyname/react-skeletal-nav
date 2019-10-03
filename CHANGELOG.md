@@ -1,4 +1,9 @@
-# [0.3.0](https://github.com/Lostmyname/react-skeletal-nav/compare/v0.2.0...v0.3.0) (2019-10-03)
+# [0.4.0](https://github.com/Lostmyname/react-skeletal-nav/compare/v0.2.0...v0.4.0) (2019-10-03)
+
+
+### Bug Fixes
+
+* Set the default navRootId to be unique ([#4](https://github.com/Lostmyname/react-skeletal-nav/issues/4)) ([525becf](https://github.com/Lostmyname/react-skeletal-nav/commit/525becf))
 
 
 ### Features
