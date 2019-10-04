@@ -67,8 +67,8 @@ class Nav extends React.PureComponent {
 
 Nav.contextType = RootNavContext;
 
-const NavWithRoot = props => (
-  <OptionalNavRoot>
+const NavWithRoot = ({ navRootId, ...props }) => (
+  <OptionalNavRoot navRootId={navRootId}>
     <Nav {...props} />
   </OptionalNavRoot>
 );

@@ -23,9 +23,11 @@ const NavRoot = ({ navRootId = uniqueId('nav-root-'), children }) => {
   );
 };
 
-export const OptionalNavRoot = ({ children }) => (
+export const OptionalNavRoot = ({ children, navRootId }) => (
   <RootNavContext.Consumer>
-    {({ route }) => (!!route ? children : <NavRoot>{children}</NavRoot>)}
+    {({ route }) =>
+      !!route ? children : <NavRoot navRootId={navRootId}>{children}</NavRoot>
+    }
   </RootNavContext.Consumer>
 );
 
