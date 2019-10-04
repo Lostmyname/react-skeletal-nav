@@ -9,7 +9,11 @@ export const Nav = withNav(
       // Hide if not visible, but don't unmount so nested navs stay mounted
       <div style={{ display: isVisible ? 'block' : 'none' }}>
         {/* Never render the back button on the "root" nav */}
-        {route !== 'root' && <button className="go-back" onClick={goBack}>{'<'} Back</button>}
+        {route !== 'root' && (
+          <button className="go-back" onClick={goBack}>
+            {'<'} Back
+          </button>
+        )}
 
         {/* Render children, including nested navs */}
         {children}
@@ -17,23 +21,29 @@ export const Nav = withNav(
     )
 );
 
-export const NavItem = withNavItem(({ children, href, onClick, title, setActiveRoute, isActive }) => {
-  const [isLinkActive, setIsLinkActive] = useState(false);
-  useEffect(() => {
-    if (href === window.location.pathname) {
-      setIsLinkActive(true);
-      setActiveRoute();
-    }
-  }, []);
-  return (
-    <div className={`nav-item${isActive || isLinkActive ? ' active' : ''}`}>
-      {href && <a href={href}>{title}</a>}
-      {!href && <button onClick={onClick}>{title} {'>'}</button>}
-      {/* Render nested navs */}
-      {children}
-    </div>
-  );
-});
+export const NavItem = withNavItem(
+  ({ children, href, onClick, title, setActiveRoute, isActive }) => {
+    const [isLinkActive, setIsLinkActive] = useState(false);
+    useEffect(() => {
+      if (href === window.location.pathname) {
+        setIsLinkActive(true);
+        setActiveRoute();
+      }
+    }, []);
+    return (
+      <div className={`nav-item${isActive || isLinkActive ? ' active' : ''}`}>
+        {href && <a href={href}>{title}</a>}
+        {!href && (
+          <button onClick={onClick}>
+            {title} {'>'}
+          </button>
+        )}
+        {/* Render nested navs */}
+        {children}
+      </div>
+    );
+  }
+);
 
 const page = title => () => {
   return (
@@ -59,10 +69,10 @@ export default () => (
       </Nav>
     </header>
     <main>
-      <Route exact path="/" render={page("Home")} />
-      <Route exact path="/about" render={page("About")} />
-      <Route exact path="/code" render={page("Code")} />
-      <Route exact path="/contact" render={page("Contact")} />
+      <Route exact path="/" render={page('Home')} />
+      <Route exact path="/about" render={page('About')} />
+      <Route exact path="/code" render={page('Code')} />
+      <Route exact path="/contact" render={page('Contact')} />
     </main>
   </Router>
 );
