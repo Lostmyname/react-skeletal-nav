@@ -1,8 +1,10 @@
-# [0.4.0](https://github.com/Lostmyname/react-skeletal-nav/compare/v0.2.0...v0.4.0) (2019-10-03)
+# [0.4.1](https://github.com/Lostmyname/react-skeletal-nav/compare/v0.2.0...v0.4.1) (2019-10-04)
 
 
 ### Bug Fixes
 
+* ensure navRootId is passed to NavRoot ([ff21815](https://github.com/Lostmyname/react-skeletal-nav/commit/ff21815))
+* ensure SSR doesn't crash by avoiding randomly generated navRootIds ([7c93aa3](https://github.com/Lostmyname/react-skeletal-nav/commit/7c93aa3))
 * Set the default navRootId to be unique ([#4](https://github.com/Lostmyname/react-skeletal-nav/issues/4)) ([525becf](https://github.com/Lostmyname/react-skeletal-nav/commit/525becf))
 
 
